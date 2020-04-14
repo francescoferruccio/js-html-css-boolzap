@@ -89,8 +89,14 @@ $(document).ready (function() {
         contattoActive.find(".preview-left p").text(msgRisposta);
         contattoActive.find(".preview-right span").text(ora);
         $(".active-chat-info").find("h5").text("Ultimo accesso oggi alle " + ora);
+
+        // scrolla all'ultimo msg
+        $(".chat-container").scrollTop(chatActive.height());
       }, 1000);
     }
+
+    // scrolla all'ultimo msg
+    $(".chat-container").scrollTop(chatActive.height());
 
   }
 
@@ -141,6 +147,9 @@ $(document).ready (function() {
     headerChat.find(".user-img").html(imgCliccata);
     headerChat.find(".active-chat-info h2").text(nomeCliccato);
     headerChat.find(".active-chat-info h5").text("Ultimo accesso oggi alle " + ultimoAccesso);
+
+    // scrolla all'ultimo msg
+    $(".chat-container").scrollTop($(".chat-box.active").height());
   }
 
   // funzione che mostra il sottomenu delle opzioni messaggio
