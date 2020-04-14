@@ -25,6 +25,7 @@ $(document).ready (function() {
   var conversazioni = $(".chat-box");
   var btnMsgOption = $(".opzioni-msg");
   var headerChat = $(".main-info");
+  var chatContainer = $(".chat-container");
 
 
 
@@ -91,12 +92,12 @@ $(document).ready (function() {
         $(".active-chat-info").find("h5").text("Ultimo accesso oggi alle " + ora);
 
         // scrolla all'ultimo msg
-        $(".chat-container").scrollTop(chatActive.height());
+        scrollToEnd(chatContainer, chatActive);
       }, 1000);
     }
 
     // scrolla all'ultimo msg
-    $(".chat-container").scrollTop(chatActive.height());
+    scrollToEnd(chatContainer, chatActive)
 
   }
 
@@ -149,7 +150,7 @@ $(document).ready (function() {
     headerChat.find(".active-chat-info h5").text("Ultimo accesso oggi alle " + ultimoAccesso);
 
     // scrolla all'ultimo msg
-    $(".chat-container").scrollTop($(".chat-box.active").height());
+    scrollToEnd(chatContainer, $(".chat-box.active"));
   }
 
   // funzione che mostra il sottomenu delle opzioni messaggio
@@ -165,6 +166,10 @@ $(document).ready (function() {
     var lastTime = $(".chat-box.active .time-msg").last();
     $(".contatto.active").find(".preview-left p").text(lastMsg.text());
     $(".contatto.active").find(".preview-right span").text(lastTime.text());
+  }
+
+  function scrollToEnd(contenitore, contenuto) {
+    contenitore.scrollTop(contenuto.height());
   }
 
 });
