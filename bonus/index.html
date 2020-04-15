@@ -406,6 +406,25 @@
       </div>
     </main>
 
+
+    <!-- Template messaggio -->
+    <script id="msg-template" type="text/x-handlebars-template">
+      <div class="messaggio {{classeMsg}}">
+        <div class="corpo-msg">
+          <p class="text-msg">{{testo}}</p>
+          <span class="time-msg">{{time}}</span>
+        </div>
+        <div class="opzioni-msg">
+          <i class="fas fa-ellipsis-v"></i>
+        </div>
+        <div class="menu-msg">
+          <span>Cancella</span>
+        </div>
+      </div>
+    </script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
   </body>

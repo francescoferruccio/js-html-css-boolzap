@@ -27,6 +27,10 @@ $(document).ready (function() {
   var headerChat = $(".main-info");
   var chatContainer = $(".chat-container");
 
+  // inizializzazione Handlebars
+  var source = $("#msg-template").html();
+  var templateMsg = Handlebars.compile(source);
+
 
 
   // INIZIO CODICE -------------------------------------------------------------
@@ -78,14 +82,21 @@ $(document).ready (function() {
     if(testoMsg != "") {
       input.val("");
 
-      chatActive.append('<div class="messaggio inviato"><div class="corpo-msg"><p class="text-msg">' + testoMsg + '</p><span class="time-msg">' + ora + '</span></div><div class="opzioni-msg"><i class="fas fa-ellipsis-v"></i></div><div class="menu-msg"><span>Cancella</span></div></div>');
+      var contMsg = { classeMsg: "inviato", testo: testoMsg, time: ora };
+      var html = templateMsg(contMsg);
+
+
+      chatActive.append(html);
       // mostro nel campo preview il msg inviato
       contattoActive.find(".preview-left p").text(testoMsg);
       $(".active-chat-info").find("h5").text("Sta scrivendo...");
 
       // messaggio di risposta automatico dopo un secondo
       setTimeout (function () {
-        chatActive.append('<div class="messaggio ricevuto"><div class="corpo-msg"><p class="text-msg">' + msgRisposta + '</p><span class="time-msg">' + ora + '</span></div><div class="opzioni-msg"><i class="fas fa-ellipsis-v"></i></div><div class="menu-msg"><span>Cancella</span></div></div>');
+        contMsg = { classeMsg: "ricevuto", testo: msgRisposta, time: ora };
+        html = templateMsg(contMsg);
+
+        chatActive.append(html);
         // scrivo nel campo preview l'ultimo msg inviato e aggiorno l'ora dell'ultimo accesso
         contattoActive.find(".preview-left p").text(msgRisposta);
         contattoActive.find(".preview-right span").text(ora);

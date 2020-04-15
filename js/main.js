@@ -25,6 +25,10 @@ $(document).ready (function() {
   var conversazioni = $(".chat-box");
   var btnMsgOption = $(".opzioni-msg");
 
+  // inizializzazione Handlebars
+  var source = $("#msg-template").html();
+  var templateMsg = Handlebars.compile(source);
+
   // DICHIARAZIONE FUNZIONI ----------------------------------------------------
 
   // funzione che stampa nella chat box il messaggio scritto dall'utente, e risponde con "ok" dopo 1 secondo
@@ -36,11 +40,17 @@ $(document).ready (function() {
     if(testoMsg != "") {
       input.val("");
 
-      chatActive.append('<div class="messaggio inviato"><div class="corpo-msg"><p class="text-msg">' + testoMsg + '</p><span class="time-msg">13:36</span></div><div class="opzioni-msg"><i class="fas fa-ellipsis-v"></i></div><div class="menu-msg"><span>Cancella</span></div></div>');
+      var contMsg = { classeMsg: "inviato", testo: testoMsg, time: "13:36" };
+      var html = templateMsg(contMsg);
+
+      chatActive.append(html);
 
       // messaggio di risposta automatico dopo un secondo
       setTimeout (function () {
-        chatActive.append('<div class="messaggio ricevuto"><div class="corpo-msg"><p class="text-msg">ok</p><span class="time-msg">11:15</span></div><div class="opzioni-msg"><i class="fas fa-ellipsis-v"></i></div><div class="menu-msg"><span>Cancella</span></div></div>');
+        contMsg = { classeMsg: "ricevuto", testo: "ok", time: "11:15" };
+        html = templateMsg(contMsg);
+
+        chatActive.append(html);
       }, 1000);
     }
   }
